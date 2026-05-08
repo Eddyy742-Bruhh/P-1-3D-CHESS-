@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Grandmaster Chess</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="canvas-container"></div>
+    
+    <div class="ui-overlay">
+        <header class="game-header">
+            <h1>Grandmaster 3D</h1>
+            <div class="turn-indicator">
+                <span id="turn-badge" class="badge white-turn">White's Turn</span>
+            </div>
+        </header>
+
+        <!-- Chess Timer (Human vs Human only) -->
+        <div id="chess-timer" class="chess-timer hidden">
+            <div class="timer-panel" id="timer-black">
+                <div class="timer-label">⬛ BLACK</div>
+                <div class="timer-display" id="black-time">10:00</div>
+            </div>
+            <div class="timer-divider">⏱</div>
+            <div class="timer-panel" id="timer-white">
+                <div class="timer-label">⬜ WHITE</div>
+                <div class="timer-display" id="white-time">10:00</div>
+            </div>
+        </div>
+
+        <!-- Game Mode Selection Modal -->
+        <div id="mode-modal" class="modal">
+            <div class="modal-content glass-panel" style="display: flex; flex-direction: column; gap: 1.5rem; min-width: 340px;">
+                <h2 style="font-size: 2.2rem; margin-bottom: 0;">Select Game Mode</h2>
+                <button id="mode-bot" class="btn-primary" style="font-size: 1.25rem;">🤖 Human V/S Robot</button>
+                <button id="mode-human" class="btn-primary btn-blue" style="font-size: 1.25rem;">🧑 Human V/S Human</button>
+            </div>
+        </div>
+
+        <!-- Difficulty Selection Modal (Human vs Robot) -->
+        <div id="difficulty-modal" class="modal hidden">
+            <div class="modal-content glass-panel difficulty-panel">
+                <h2 style="font-size: 2rem; margin-bottom: 0.2rem;">Choose Difficulty</h2>
+                <p class="subtitle">Select Bot Strength</p>
+                <div class="difficulty-list">
+                    <button class="diff-btn" data-level="novice">
+                        <span class="diff-icon">🌱</span>
+                        <span class="diff-name">Novice</span>
+                        <span class="diff-elo">200 – 500 ELO</span>
+                    </button>
+                    <button class="diff-btn" data-level="intermediate">
+                        <span class="diff-icon">⚡</span>
+                        <span class="diff-name">Intermediate</span>
+                        <span class="diff-elo">500 – 900 ELO</span>
+                    </button>
+                    <button class="diff-btn" data-level="advanced">
+                        <span class="diff-icon">🔥</span>
+                        <span class="diff-name">Advanced</span>
+                        <span class="diff-elo">1000 – 1500 ELO</span>
+                    </button>
+                    <button class="diff-btn" data-level="professional">
+                        <span class="diff-icon">🏆</span>
+                        <span class="diff-name">Professional</span>
+                        <span class="diff-elo">1600 – 2000 ELO</span>
+                    </button>
+                    <button class="diff-btn diff-gm" data-level="grandmaster">
+                        <span class="diff-icon">👑</span>
+                        <span class="diff-name">Grandmaster</span>
+                        <span class="diff-elo">2000+ ELO</span>
+                    </button>
+                </div>
+                <button id="back-to-mode" class="btn-secondary" style="margin-top:0.5rem;">← Back</button>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="game-over-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h2 id="game-over-title">Checkmate!</h2>
+                <p id="game-over-message">White wins the game.</p>
+                <button id="restart-btn" class="btn-primary">Play Again</button>
+            </div>
+        </div>
+
+        <!-- Pawn Promotion Modal -->
+        <div id="promotion-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <h2>Promote Pawn</h2>
+                <p>Choose a piece to promote your pawn to:</p>
+                <div id="promotion-options" class="promotion-pieces">
+                    <!-- Promoted pieces options will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js + OrbitControls from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="script.js?v=20260507-5"></script>
+</body>
+</html>
